@@ -80,7 +80,7 @@ main(int argc, char* argv[])
 	float blink_speed = 50000; // скорость мигания
 	int change_counter = 0; // "время" смены состяния светодиода
 
-	led3.On();
+	led3.On(); //
 
 	while (1)
     {
