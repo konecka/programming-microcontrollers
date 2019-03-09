@@ -77,30 +77,31 @@ main(int argc, char* argv[])
 	GPIO_Init(GPIOA, &initStruct);
 
 	int w_counter = 0; // счетчик пройденных циклов
-	int blink_speed = 100000; // скорость мигания
+	float blink_speed = 50000; // скорость мигания
 	int change_counter = 0; // "время" смены состяния светодиода
 
+	led3.On();
 
 	while (1)
     {
 		w_counter++;
 
 		if (!GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3)) {
-			blink_speed+=1;
+			blink_speed+=0.1;
 		}
 
 		if (!GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2)) {
-			blink_speed-=1;
+			blink_speed-=0.1;
 		}
 
 
-		if (int(blink_speed) >=  500000 || int(blink_speed) <= 0 || w_counter > 100000) {
+		if (int(blink_speed) >=  5000000 || int(blink_speed) <= 0) {
 			w_counter = blink_speed = change_counter = 0;
 		}
 
 		if(w_counter - change_counter > blink_speed) {
 		    change_counter = w_counter;
-		    led1.ConvertState();
+		    led3.ConvertState();
 		}
     }
 }
